@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Calibri, "Segoe UI",
+        "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}
+
+textarea,
+button,
+input {
+    -webkit-appearance: none; /* Удаление стилей по умолчанию для iOS */
+    -moz-appearance: none; /* Удаление стилей по умолчанию для Firefox */
+    appearance: none; /* Удаление стилей по умолчанию */
+    background-color: transparent; /* Устанавливаем прозрачный фон */
+    border: none; /* Удаляем рамку */
+    color: black;
+    background-color: transparent;
+}

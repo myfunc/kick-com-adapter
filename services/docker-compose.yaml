@@ -1,0 +1,41 @@
+version: "3.7"
+services:
+    messages-client:
+        container_name: messages-client-container
+        image: messages-client-container
+        build:
+            context: ./client
+            dockerfile: Dockerfile
+        environment:
+            - PORT=3000
+            - REACT_APP_API_URL=http://localhost:3005
+        volumes:
+            - ./client:/usr/src
+        ports:
+            - 3000:3000
+        networks:
+            messages-network:
+                ipv4_address: 15.0.9.1
+    messages-core:
+        container_name: messages-core-container
+        image: messages-core-container
+        build:
+            context: ./core
+            dockerfile: Dockerfile
+        environment:
+            - PORT=3005
+            - ENV=dev
+        ports:
+            - 3005:3005
+        volumes:
+            - ./core:/usr/src
+        networks:
+            messages-network:
+                ipv4_address: 15.0.9.2
+networks:
+    messages-network:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 15.0.0.0/16
