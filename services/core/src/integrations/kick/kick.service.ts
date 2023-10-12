@@ -32,7 +32,7 @@ export class KickService {
             browser = await puppeteer.launch({
                 headless: true,
                 executablePath: "/usr/bin/google-chrome-stable",
-                args: ["--no-sandbox"], // Disable the Chrome sandbox
+                args: ["--no-sandbox"],
             });
         } else {
             browser = await puppeteer.launch();
@@ -73,26 +73,11 @@ export class KickService {
         );
     }
 
-    // https://kick.com/api/v1/channels/myfunc - chanel info. $.chatrooms.id - chatroom.[id].v2
-    // wss://ws-us2.pusher.com/app/eb1d5f283081a78b932c?protocol=7&client=js&version=7.6.0&flash=false
-
-    // ws messages updates
-    // {"event":"pusher:subscribe","data":{"auth":"","channel":"chatrooms.[id].v2"}}
-
-    // update:
-    // {
-    //     "event": "App\\Events\\ChatMessageEvent",
-    //     "data": "{\"id\":\"5ad90b78-7283-444a-a91d-7105097a4250\",\"chatroom_id\":875062,\"content\":\"[emote:37226:KEKW]\",\"type\":\"message\",\"created_at\":\"2023-10-12T01:29:15+00:00\",\"sender\":{\"id\":1052763,\"username\":\"Edoardq\",\"slug\":\"edoardq\",\"identity\":{\"color\":\"#FBCFD8\",\"badges\":[]}}}",
-    //     "channel": "chatrooms.875062.v2"
-    // }
-
     private parseWsMessage(rawMessage) {
         let message = {} as any;
         if (Buffer.isBuffer(rawMessage)) {
-            // Convert buffer to string
             const strMessage = rawMessage.toString("utf8");
             try {
-                // Try parsing the string message to JSON
                 message = JSON.parse(strMessage);
             } catch (err) {
                 console.error("Failed to parse message:", strMessage);
@@ -100,7 +85,6 @@ export class KickService {
             }
         } else if (typeof rawMessage === "string") {
             try {
-                // Try parsing the string message to JSON
                 message = JSON.parse(rawMessage);
             } catch (err) {
                 console.error("Failed to parse message:", rawMessage);
