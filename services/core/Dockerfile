@@ -13,6 +13,7 @@ WORKDIR /usr/src
 
 ARG PORT
 ENV PORT="$PORT"
+ENV RUN_IN_DOCKER="true"
 
 COPY ./entrypoint.sh ./entrypoint.sh
 RUN chmod +x ./entrypoint.sh
