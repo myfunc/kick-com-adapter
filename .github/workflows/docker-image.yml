@@ -1,0 +1,30 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and push client image
+      run: |
+        docker build -t ghcr.io/${{ github.repository }}-client:${{ github.sha }} ./services/client
+        docker push ghcr.io/${{ github.repository }}-client:${{ github.sha }}
+
+    - name: Build and push core image
+      run: |
+        docker build -t ghcr.io/${{ github.repository }}-core:${{ github.sha }} ./services/core
+        docker push ghcr.io/${{ github.repository }}-core:${{ github.sha }}
