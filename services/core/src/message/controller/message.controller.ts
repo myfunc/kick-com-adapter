@@ -15,7 +15,15 @@ export class MessageController {
                 });
             };
 
-            this.messageService.subscribeToChat(channelName, handler);
+            const isOnline = this.messageService.subscribeToChat(
+                channelName,
+                handler
+            );
+
+            if (!isOnline) {
+                observer.complete();
+                return;
+            }
 
             return () => {
                 this.messageService.unsubscribeFromChat(channelName, handler);

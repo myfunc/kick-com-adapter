@@ -28,7 +28,7 @@ export class KickService {
         if (this._page) return;
 
         let browser: Browser;
-        if (process.env.RUN_IN_DOCKER) {
+        if (process.env.RUN_IN_DOCKER === "true") {
             browser = await puppeteer.launch({
                 headless: true,
                 executablePath: "/usr/bin/google-chrome-stable",

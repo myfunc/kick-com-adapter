@@ -18,7 +18,13 @@ export class MessageService {
     ) {
         const channel = await this.kick.getChannelInfo(channelName);
 
+        if (!channel?.chatroom) {
+            return false;
+        }
+
         this.kick.onMessage(channel!.chatroom!.id, handler);
+
+        return true;
     }
 
     public async unsubscribeFromChat(
