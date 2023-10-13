@@ -7,7 +7,7 @@ The project has 2 modules: server and client.
 -   The `messages-core` server has an SSH endpoint which returns all chat updates in real-time.
 -   The `messages-client` provides a UI for subscribing and tracking chat updates.
 
-Demo: [http://messages.myfunc.io/](http://messages.myfunc.io/)
+Demo: [http://messages.myfunc.io:3000/](http://messages.myfunc.io:3000/)
 
 ![Home](images/demo.png)
 
