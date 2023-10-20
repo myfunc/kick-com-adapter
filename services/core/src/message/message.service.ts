@@ -22,7 +22,7 @@ export class MessageService {
             return false;
         }
 
-        this.kick.onMessage(channel!.chatroom!.id, handler);
+        this.kick.onMessage(channel!.chatroom!.id.toString(), handler);
 
         return true;
     }
@@ -33,6 +33,10 @@ export class MessageService {
     ) {
         const channel = await this.kick.getChannelInfo(channelName); // can be optimized;
 
-        this.kick.offMessages(channel!.chatroom!.id, handler);
+        if (!channel?.chatroom) {
+            return false;
+        }
+
+        this.kick.offMessages(channel!.chatroom!.id.toString(), handler);
     }
 }
